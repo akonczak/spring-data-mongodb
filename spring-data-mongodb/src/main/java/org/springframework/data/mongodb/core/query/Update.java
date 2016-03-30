@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +35,14 @@ import com.mongodb.DBObject;
 
 /**
  * Class to easily construct MongoDB update clauses.
- * 
+ *
  * @author Thomas Risberg
  * @author Mark Pollack
  * @author Oliver Gierke
  * @author Becca Gaspard
  * @author Christoph Strobl
  * @author Thomas Darimont
+ * @author Alexey Plotnik
  */
 public class Update {
 
@@ -55,7 +56,7 @@ public class Update {
 
 	/**
 	 * Static factory method to create an Update using the provided key
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -69,7 +70,7 @@ public class Update {
 	 * {@literal $set}. This means fields not given in the {@link DBObject} will be nulled when executing the update. To
 	 * create an only-updating {@link Update} instance of a {@link DBObject}, call {@link #set(String, Object)} for each
 	 * value in it.
-	 * 
+	 *
 	 * @param object the source {@link DBObject} to create the update from.
 	 * @param exclude the fields to exclude.
 	 * @return
@@ -99,7 +100,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $set} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/set/
 	 * @param key
 	 * @param value
@@ -112,7 +113,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $setOnInsert} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/setOnInsert/
 	 * @param key
 	 * @param value
@@ -125,7 +126,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $unset} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/unset/
 	 * @param key
 	 * @return
@@ -137,7 +138,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $inc} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/inc/
 	 * @param key
 	 * @param inc
@@ -150,7 +151,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $push} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/push/
 	 * @param key
 	 * @param value
@@ -165,7 +166,7 @@ public class Update {
 	 * Update using {@code $push} modifier. <br/>
 	 * Allows creation of {@code $push} command for single or multiple (using {@code $each}) values as well as using
 	 * {@code $position}.
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/push/
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/each/
 	 * @param key
@@ -183,7 +184,7 @@ public class Update {
 	 * Update using the {@code $pushAll} update modifier. <br>
 	 * <b>Note</b>: In mongodb 2.4 the usage of {@code $pushAll} has been deprecated in favor of {@code $push $each}.
 	 * {@link #push(String)}) returns a builder that can be used to populate the {@code $each} object.
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/pushAll/
 	 * @param key
 	 * @param values
@@ -197,7 +198,7 @@ public class Update {
 	/**
 	 * Update using {@code $addToSet} modifier. <br/>
 	 * Allows creation of {@code $push} command for single or multiple (using {@code $each}) values
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 * @since 1.5
@@ -208,7 +209,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $addToSet} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/addToSet/
 	 * @param key
 	 * @param value
@@ -221,7 +222,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $pop} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/pop/
 	 * @param key
 	 * @param pos
@@ -234,7 +235,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $pull} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/pull/
 	 * @param key
 	 * @param value
@@ -247,7 +248,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $pullAll} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/pullAll/
 	 * @param key
 	 * @param values
@@ -260,7 +261,7 @@ public class Update {
 
 	/**
 	 * Update using the {@literal $rename} update modifier
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/rename/
 	 * @param oldName
 	 * @param newName
@@ -273,7 +274,7 @@ public class Update {
 
 	/**
 	 * Update given key to current date using {@literal $currentDate} modifier.
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/currentDate/
 	 * @param key
 	 * @return
@@ -287,7 +288,7 @@ public class Update {
 
 	/**
 	 * Update given key to current date using {@literal $currentDate : &#123; $type : "timestamp" &#125;} modifier.
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/currentDate/
 	 * @param key
 	 * @return
@@ -301,7 +302,7 @@ public class Update {
 
 	/**
 	 * Multiply the value of given key by the given number.
-	 * 
+	 *
 	 * @see http://docs.mongodb.org/manual/reference/operator/update/mul/
 	 * @param key must not be {@literal null}.
 	 * @param multiplier must not be {@literal null}.
@@ -314,7 +315,7 @@ public class Update {
 		addMultiFieldOperation("$mul", key, multiplier.doubleValue());
 		return this;
 	}
-	
+
 	/**
 	 * Update using the {@literal $max} update modifier
 	 *
@@ -324,6 +325,7 @@ public class Update {
 	 * @return
 	 */
 	public Update max(String key, Object value) {
+
 		Assert.notNull(value, "Value must not be 'null'.");
 		addMultiFieldOperation("$max", key, value);
 		return this;
@@ -338,6 +340,7 @@ public class Update {
 	 * @return
 	 */
 	public Update min(String key, Object value) {
+
 		Assert.notNull(value, "Value must not be 'null'.");
 		addMultiFieldOperation("$min", key, value);
 		return this;
@@ -345,7 +348,7 @@ public class Update {
 
 	/**
 	 * The operator supports bitwise {@code and}, bitwise {@code or}, and bitwise {@code xor} operations.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 * @since 1.7
@@ -360,7 +363,7 @@ public class Update {
 
 	/**
 	 * This method is not called anymore rather override {@link #addMultiFieldOperation(String, String, Object)}.
-	 * 
+	 *
 	 * @param operator
 	 * @param key
 	 * @param value
@@ -399,7 +402,7 @@ public class Update {
 
 	/**
 	 * Determine if a given {@code key} will be touched on execution.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -409,7 +412,7 @@ public class Update {
 
 	/**
 	 * Inspects given {@code key} for '$'.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -417,7 +420,7 @@ public class Update {
 		return StringUtils.startsWithIgnoreCase(key, "$");
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -426,7 +429,7 @@ public class Update {
 		return getUpdateObject().hashCode();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -456,7 +459,7 @@ public class Update {
 
 	/**
 	 * Modifiers holds a distinct collection of {@link Modifier}
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 * @author Thomas Darimont
 	 */
@@ -506,7 +509,7 @@ public class Update {
 
 	/**
 	 * Marker interface of nested commands.
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 */
 	public static interface Modifier {
@@ -524,7 +527,7 @@ public class Update {
 
 	/**
 	 * Implementation of {@link Modifier} representing {@code $each}.
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 * @author Thomas Darimont
 	 */
@@ -567,7 +570,7 @@ public class Update {
 			return this.values;
 		}
 
-		/* 
+		/*
 		 * (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -576,7 +579,7 @@ public class Update {
 			return nullSafeHashCode(values);
 		}
 
-		/* 
+		/*
 		 * (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -597,7 +600,7 @@ public class Update {
 
 	/**
 	 * {@link Modifier} implementation used to propagate {@code $position}.
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 * @since 1.7
 	 */
@@ -622,7 +625,7 @@ public class Update {
 
 	/**
 	 * Builder for creating {@code $push} modifiers
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 * @author Thomas Darimont
 	 */
@@ -638,7 +641,7 @@ public class Update {
 
 		/**
 		 * Propagates {@code $each} to {@code $push}
-		 * 
+		 *
 		 * @param values
 		 * @return
 		 */
@@ -650,7 +653,7 @@ public class Update {
 
 		/**
 		 * Forces values to be added at the given {@literal position}.
-		 * 
+		 *
 		 * @param position needs to be greater than or equal to zero.
 		 * @return
 		 * @since 1.7
@@ -668,7 +671,7 @@ public class Update {
 
 		/**
 		 * Forces values to be added at given {@literal position}.
-		 * 
+		 *
 		 * @param position can be {@literal null} which will be appended at the last position.
 		 * @return
 		 * @since 1.7
@@ -686,7 +689,7 @@ public class Update {
 
 		/**
 		 * Propagates {@link #value(Object)} to {@code $push}
-		 * 
+		 *
 		 * @param values
 		 * @return
 		 */
@@ -694,7 +697,7 @@ public class Update {
 			return Update.this.push(key, value);
 		}
 
-		/* 
+		/*
 		 * (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -710,7 +713,7 @@ public class Update {
 			return result;
 		}
 
-		/* 
+		/*
 		 * (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -741,7 +744,7 @@ public class Update {
 
 	/**
 	 * Builder for creating {@code $addToSet} modifier.
-	 * 
+	 *
 	 * @author Christoph Strobl
 	 * @since 1.5
 	 */
@@ -755,7 +758,7 @@ public class Update {
 
 		/**
 		 * Propagates {@code $each} to {@code $addToSet}
-		 * 
+		 *
 		 * @param values
 		 * @return
 		 */
@@ -765,7 +768,7 @@ public class Update {
 
 		/**
 		 * Propagates {@link #value(Object)} to {@code $addToSet}
-		 * 
+		 *
 		 * @param values
 		 * @return
 		 */
@@ -795,7 +798,7 @@ public class Update {
 
 		/**
 		 * Creates a new {@link BitwiseOperatorBuilder}.
-		 * 
+		 *
 		 * @param reference must not be {@literal null}
 		 * @param key must not be {@literal null}
 		 */
@@ -810,7 +813,7 @@ public class Update {
 
 		/**
 		 * Updates to the result of a bitwise and operation between the current value and the given one.
-		 * 
+		 *
 		 * @param value
 		 * @return
 		 */
@@ -822,7 +825,7 @@ public class Update {
 
 		/**
 		 * Updates to the result of a bitwise or operation between the current value and the given one.
-		 * 
+		 *
 		 * @param value
 		 * @return
 		 */
@@ -834,7 +837,7 @@ public class Update {
 
 		/**
 		 * Updates to the result of a bitwise xor operation between the current value and the given one.
-		 * 
+		 *
 		 * @param value
 		 * @return
 		 */
